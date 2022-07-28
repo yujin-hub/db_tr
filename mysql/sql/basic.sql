@@ -11,16 +11,33 @@ USE olive;
 SELECT * FROM user;
 
 -- 컬럼 추가
-ALTER TABLE member2 ADD column nickname VARCHAR(45);
-ALTER TABLE member2 ADD column name VARCHAR(45);
-ALTER TABLE member2 ADD column ID VARCHAR(45);
-ALTER TABLE member2 ADD column nameEng VARCHAR(45) AFTER name;
-ALTER TABLE member2 ADD column nameChn VARCHAR(45) AFTER name;
-ALTER TABLE member2 ADD column dob DATE;
-ALTER TABLE member2 ADD column gender TINYINT;
+ALTER TABLE member2 ADD COLUMN nickname VARCHAR(45);
+ALTER TABLE member2 ADD COLUMN name VARCHAR(45);
+ALTER TABLE member2 ADD COLUMN ID VARCHAR(45);
+ALTER TABLE member2 ADD COLUMN nameEng VARCHAR(45) AFTER name;
+ALTER TABLE member2 ADD COLUMN nameChn VARCHAR(45) AFTER name;
+ALTER TABLE member2 ADD COLUMN dob DATE;
+ALTER TABLE member2 ADD COLUMN gender TINYINT;
 
 -- 컬럼 변경 (자료형을 바꾸는 경우 데이터가 작성되어 있으면 잘 안될수도)
-ALTER TABLE member2 MODIFY column nickname varchar(100);
+ALTER TABLE member2 MODIFY COLUMN nickname varchar(100);
 
 -- 컬럼 이름 변경
-ALTER TABLE member2 CHANGE column nickname nick VARCHAR(45);
+ALTER TABLE member2 CHANGE COLUMN nickname nick VARCHAR(45);
+
+-- 컬럼 삭제
+ALTER TABLE member2 DROP COLUMN nick;
+
+-- row 삭제
+DELETE FROM user WHERE seq = 10;
+
+-- 데이터 수정
+UPDATE user set 
+	email = "dbfl@naver.com" 
+	, id = "dbfl3"
+where seq = 11;
+
+SELECT * FROM user;
+
+
+-- commit / rollback
