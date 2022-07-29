@@ -7,7 +7,7 @@ DROP TABLE user;
 
 CREATE TABLE IF NOT EXISTS `olive`.`brand_list` (
   `seq` INT NOT NULL AUTO_INCREMENT,
-  `div` TINYINT NOT NULL COMMENT '브랜드 리스트',
+  `num` TINYINT NOT NULL COMMENT '브랜드 리스트',
   PRIMARY KEY (`seq`))
 ENGINE = InnoDB
 ;
@@ -63,27 +63,6 @@ CREATE TABLE IF NOT EXISTS `olive`.`shipping_addr` (
   PRIMARY KEY (`seq`),
   INDEX `fk_shipping_addr_user1_idx` (`user_seq` ASC) VISIBLE,
   CONSTRAINT `fk_shipping_addr_user1`
-    FOREIGN KEY (`user_seq`)
-    REFERENCES `olive`.`user` (`seq`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-;
-
-CREATE TABLE IF NOT EXISTS `olive`.`interest_list` (
-  `seq` INT NOT NULL AUTO_INCREMENT,
-  `div` TINYINT NOT NULL COMMENT '1: 스킨케어 2: 색조메이크업 3: 바디케어 4: 헤어',
-  `item_seq` INT NOT NULL,
-  `user_seq` INT NOT NULL,
-  PRIMARY KEY (`seq`),
-  INDEX `fk_interest_list_item1_idx` (`item_seq` ASC) VISIBLE,
-  INDEX `fk_interest_list_user1_idx` (`user_seq` ASC) VISIBLE,
-  CONSTRAINT `fk_interest_list_item1`
-    FOREIGN KEY (`item_seq`)
-    REFERENCES `olive`.`item` (`seq`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_interest_list_user1`
     FOREIGN KEY (`user_seq`)
     REFERENCES `olive`.`user` (`seq`)
     ON DELETE NO ACTION
@@ -644,3 +623,404 @@ CREATE TABLE IF NOT EXISTS `olive`.`member2` (
   PRIMARY KEY (`seq`))
 ENGINE = InnoDB
 ;
+
+
+INSERT INTO brand_list (
+		num
+	)
+VALUES (
+		1
+	)
+;
+
+INSERT INTO brand_list (
+		num
+	)
+VALUES (
+		2
+	)
+;
+
+INSERT INTO brand_list (
+		num
+	)
+VALUES (
+		3
+	)
+;
+
+INSERT INTO brand_list (
+		num
+	)
+VALUES (
+		4
+	)
+;
+
+INSERT INTO brand_list (
+		num
+	)
+VALUES (
+		5
+	)
+;
+
+
+SELECT * FROM brand_list;
+
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"킬커버쿠션"
+        , "클리오"
+        , 27000
+        , "general"
+        , "14호"
+        , 2
+        , 54000
+        , "끈적함 없는 뽀송한 마무리감"
+        , "성분: 정제수,,"
+        , 1
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"킬브로우 펜슬"
+        , "클리오"
+        , 15000
+        , "today"
+        , "7호"
+        , 1
+        , 15000
+        , "물에도 잘 번지지 않는 아이라이너"
+        , "성분: 흑색 산화철,,"
+        , 1
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"센시비오 H2O"
+        , "바이오더마"
+        , 32000
+        , "today"
+        , "none"
+        , 1
+        , 32000
+        , "판매 1위 클렌징워터"
+        , "성분: 정제수,,"
+        , 2
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"아토덤 립스틱"
+        , "바이오더마"
+        , 10000
+        , "general"
+        , "1호"
+        , 3
+        , 30000
+        , "입술이 건조한 분들께 추천"
+        , "성분: 미네랄 오일,,"
+        , 2
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"엔젤아쿠아 톤업크림"
+        , "비욘드"
+        , 28000
+        , "general"
+        , "none"
+        , 2
+        , 56000
+        , "자연스럽게 밝아지는 톤업크림"
+        , "성분: 글리세린,,"
+        , 3
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"인텐스 바디에멀젼"
+        , "비욘드"
+        , 35000
+        , "general"
+        , "none"
+        , 1
+        , 35000
+        , "안티에이징 바디토탈케어"
+        , "성분: 글리세린,,"
+        , 3
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"매직프레스 페디"
+        , "데싱디바"
+        , 9700
+        , "general"
+        , "23호"
+        , 1
+        , 9700
+        , "지속력 좋은 네일팁"
+        , "환불 및 반품 불가"
+        , 4
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"매직프레스 매니"
+        , "데싱디바"
+        , 10800
+        , "general"
+        , "5호"
+        , 2
+        , 21600
+        , "지속력 좋은 네일팁"
+        , "환불 및 반품 불가"
+        , 4
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"퍼펙트세럼 미스트"
+        , "미쟝센"
+        , 18000
+        , "today"
+        , "none"
+        , 1
+        , 18000
+        , "상한 머릿결 케어"
+        , "성분: 변성알코올,,"
+        , 5
+	)
+;
+
+INSERT INTO item (
+		name
+        , brand
+        , price
+        , shipping
+        , select_item
+        , select_num
+        , total
+        , info_item
+        , info_purchase
+        , brand_list_seq
+	)
+VALUES (
+		"헬로버블 보색샴푸"
+        , "미쟝센"
+        , 22000
+        , "today"
+        , "none"
+        , 3
+        , 66000
+        , "염색 컬러 빠짐 방지"
+        , "성분: 소듐벤조에이트,,"
+        , 5
+	)
+;
+
+SELECT * FROM item;
+
+
+INSERT INTO purchase (
+		ship_name
+        , receiver
+        , tel
+        , addr
+        , message
+        , paytype
+        , price
+        , coupon
+        , total
+        , item_seq
+        , user_seq
+	)
+VALUES (
+		"home"
+        , "YJ"
+        , 11111111
+        , "Seoul"
+        , "문앞"
+        , "KBcard"
+        , 21600
+        , "2000원 할인"
+        , 19600
+        , 8
+        , 1
+	)
+;
+
+
+INSERT INTO purchase (
+		ship_name
+        , receiver
+        , tel
+        , addr
+        , message
+        , paytype
+        , price
+        , coupon
+        , total
+        , item_seq
+        , user_seq
+	)
+VALUES (
+		"home"
+        , "MG"
+        , 22222222
+        , "Gwangju"
+        , "문앞"
+        , "SHcard"
+        , 10000
+        , "none"
+        , 30000
+        , 4
+        , 2
+	)
+;
+	
+INSERT INTO purchase (
+		ship_name
+        , receiver
+        , tel
+        , addr
+        , message
+        , paytype
+        , price
+        , coupon
+        , total
+        , item_seq
+        , user_seq
+	)
+VALUES (
+		"home"
+        , "MG"
+        , 22222222
+        , "Gwangju"
+        , "문앞"
+        , "SHcard"
+        , 27000
+        , "4000원 할인"
+        , 50000
+        , 1
+        , 2
+	)
+;
+
+
+SELECT * FROM purchase;
+SELECT * FROM user;
+SELECT * FROM item;
+
+
+	

@@ -41,3 +41,38 @@ SELECT * FROM user;
 
 
 -- commit / rollback
+
+
+SELECT * FROM user 
+WHERE 1=1
+ -- AND name like '%R'
+ -- AND name like 'H%'
+ -- AND name like '%R%'
+	AND name like '%S%'
+;
+
+SELECT * FROM user 
+WHERE 1=1
+ -- AND skintype = 1
+ -- AND skintype > 2
+ -- AND skintype >= 2
+ -- AND skintype between 2 and 4
+	AND skintype < 3
+;
+
+SELECT * FROM purchase
+WHERE 1=1
+AND total is null
+;
+
+SELECT * FROM item;
+
+SELECT * FROM item
+WHERE 1=1
+AND name like '%프레스%'
+;
+
+SELECT * FROM item
+WHERE 1=1
+AND total between 10000 and 25000
+;
