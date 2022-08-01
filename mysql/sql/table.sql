@@ -343,7 +343,7 @@ INSERT INTO user (
         , interest
 	) 
 VALUES (
-		"GH"
+		"KH"
         , 1
         , '1996.03.27'
         , 66666666
@@ -615,6 +615,102 @@ VALUES (
 	)
 ;
 
+INSERT INTO shipping_addr (
+		receiver
+        , ship_name
+        , tel
+        , addr
+        , user_seq
+	) 
+VALUES (
+		"SE"
+        , "home"
+        , 44444444
+        , "Namyangju"
+		, 4
+	)
+;
+
+INSERT INTO shipping_addr (
+		receiver
+        , ship_name
+        , tel
+        , addr
+        , user_seq
+	) 
+VALUES (
+		"SE"
+        , "home2"
+        , 44444444
+        , "Guri"
+		, 4
+	)
+;
+
+INSERT INTO shipping_addr (
+		receiver
+        , ship_name
+        , tel
+        , addr
+        , user_seq
+	) 
+VALUES (
+		"SE"
+        , "corp"
+        , 44444444
+        , "Gemcheongu"
+		, 4
+	)
+;
+
+INSERT INTO shipping_addr (
+		receiver
+        , ship_name
+        , tel
+        , addr
+        , user_seq
+	) 
+VALUES (
+		"HS"
+        , "home"
+        , 55555555
+        , "Itaewon"
+		, 5
+	)
+;
+
+INSERT INTO shipping_addr (
+		receiver
+        , ship_name
+        , tel
+        , addr
+        , user_seq
+	) 
+VALUES (
+		"HS"
+        , "home2"
+        , 55555555
+        , "Incheon"
+		, 5
+	)
+;
+
+INSERT INTO shipping_addr (
+		receiver
+        , ship_name
+        , tel
+        , addr
+        , user_seq
+	) 
+VALUES (
+		"HS"
+        , "corp"
+        , 55555555
+        , "Bundang"
+		, 5
+	)
+;
+
 SELECT * FROM shipping_addr;
 
 
@@ -627,41 +723,51 @@ ENGINE = InnoDB
 
 INSERT INTO brand_list (
 		num
+        , name
 	)
 VALUES (
 		1
+		, "클리오"
 	)
 ;
 
 INSERT INTO brand_list (
 		num
+        , name
 	)
 VALUES (
 		2
+        , "바이오더마"
 	)
 ;
 
 INSERT INTO brand_list (
 		num
+        , name
 	)
 VALUES (
 		3
+        , "비욘드"
 	)
 ;
 
 INSERT INTO brand_list (
 		num
+        , name
 	)
 VALUES (
 		4
+        , "데싱디바"
 	)
 ;
 
 INSERT INTO brand_list (
 		num
+        , name
 	)
 VALUES (
 		5
+        , "미쟝센"
 	)
 ;
 
@@ -960,7 +1066,6 @@ VALUES (
 	)
 ;
 
-
 INSERT INTO purchase (
 		ship_name
         , receiver
@@ -1017,10 +1122,103 @@ VALUES (
 	)
 ;
 
+INSERT INTO purchase (
+		ship_name
+        , receiver
+        , tel
+        , addr
+        , message
+        , paytype
+        , price
+        , coupon
+        , total
+        , item_seq
+        , user_seq
+	)
+VALUES (
+		"corp"
+        , "LE"
+        , 3333333
+        , "Dongjakgu"
+        , "none"
+        , "SHcard"
+        , 35000
+        , "none"
+        , 35000
+        , 6
+        , 3
+	)
+;
 
+INSERT INTO item_qna(
+		question
+        , writer
+        , answer
+        , reply
+        , date
+        , item_seq
+	)
+VALUES (
+		"배송 출발은 언제인가요?"
+        , "cuj"
+        , "내일 바로 출고됩니다."
+        , "Manager"
+        , '2022.07.13'
+        , 1
+	)
+;
+
+INSERT INTO item_qna(
+		question
+        , writer
+        , answer
+        , reply
+        , date
+        , item_seq
+	)
+VALUES (
+		"배송이 완료 됐는데 배송완료 표시가 뜨지 않아요."
+        , "dpawnl"
+        , "바로 처리해드리겠습니다."
+        , "Manager"
+        , '2022.07.18'
+        , 4
+	)
+;
+
+INSERT INTO item_qna(
+		question
+        , writer
+        , answer
+        , reply
+        , date
+        , item_seq
+	)
+VALUES (
+		"포인트 적립은 언제 되나요?"
+        , "dpawnl"
+        , "이번주 내로 적립될 예정입니다."
+        , "Manager"
+        , '2022.07.19'
+        , 1
+	)
+;
+
+
+SELECT * FROM brand_list;
+SELECT * FROM shipping_addr;
 SELECT * FROM purchase;
 SELECT * FROM user;
 SELECT * FROM item;
+SELECT * FROM item_qna;
 
+ALTER TABLE item DROP COLUMN brand;
+ALTER TABLE item DROP COLUMN total;
+ALTER TABLE user DROP COLUMN interest;
+ALTER TABLE item DROP COLUMN select_num;
+ALTER TABLE shipping_addr DROP COLUMN receiver;
+ALTER TABLE shipping_addr DROP COLUMN tel;
+ALTER TABLE shipping_addr ADD COLUMN addr_detail VARCHAR(45);
+ALTER TABLE shipping_addr ADD COLUMN post VARCHAR(45);
+ALTER TABLE purchase ADD COLUMN quantity TINYINT;
 
-	
