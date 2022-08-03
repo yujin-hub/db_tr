@@ -1212,13 +1212,183 @@ SELECT * FROM user;
 SELECT * FROM item;
 SELECT * FROM item_qna;
 
-ALTER TABLE item DROP COLUMN brand;
-ALTER TABLE item DROP COLUMN total;
-ALTER TABLE user DROP COLUMN interest;
-ALTER TABLE item DROP COLUMN select_num;
-ALTER TABLE shipping_addr DROP COLUMN receiver;
-ALTER TABLE shipping_addr DROP COLUMN tel;
-ALTER TABLE shipping_addr ADD COLUMN addr_detail VARCHAR(45);
-ALTER TABLE shipping_addr ADD COLUMN post VARCHAR(45);
-ALTER TABLE purchase ADD COLUMN quantity TINYINT;
+ALTER TABLE item_qna CHANGE COLUMN date date DATETIME;
 
+
+SELECT * FROM CodeGroup;
+SELECT * FROM Code;
+
+INSERT INTO CodeGroup(
+		property
+        , useNY
+        , delNY
+	)
+VALUES (
+		"skintype"
+		, 1	
+        , 0
+	)
+;
+
+INSERT INTO CodeGroup(
+		property
+        , useNY
+        , delNY
+	)
+VALUES (
+		"message"
+		, 1	
+        , 0
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"건성"
+		, 1	
+        , 0
+        , 1
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"지성"
+		, 1	
+        , 0
+        , 1
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"복합성"
+		, 1	
+        , 0
+        , 1
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"중성"
+		, 1	
+        , 0
+        , 1
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"문 앞에 놔주세요"
+		, 1	
+        , 0
+        , 2
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"경비실에 맡겨주세요"
+		, 1	
+        , 0
+        , 2
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"배송 전에 연락주세요"
+		, 1	
+        , 0
+        , 2
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"부재시 연락주세요"
+		, 1	
+        , 0
+        , 2
+	)
+;
+
+INSERT INTO Code(
+		name
+        , useNY
+        , delNY
+        , CodeGroup_seq
+	)
+VALUES (
+		"직접입력"
+		, 1	
+        , 0
+        , 2
+	)
+;
+
+CREATE TABLE IF NOT EXISTS `olive`.`CodeGroup` (
+  `seq` INT NOT NULL AUTO_INCREMENT,
+  `property` VARCHAR(45) NOT NULL,
+  `useNY` TINYINT NOT NULL,
+  `delNY` TINYINT NOT NULL,
+  PRIMARY KEY (`seq`))
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `olive`.`Code` (
+  `seq` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `useNY` TINYINT NOT NULL,
+  `delNY` TINYINT NOT NULL,
+  `CodeGroup_seq` INT NOT NULL,
+  PRIMARY KEY (`seq`),
+  INDEX `fk_Code_CodeGroup1_idx` (`CodeGroup_seq` ASC) VISIBLE,
+  CONSTRAINT `fk_Code_CodeGroup1`
+    FOREIGN KEY (`CodeGroup_seq`)
+    REFERENCES `olive`.`CodeGroup` (`seq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
