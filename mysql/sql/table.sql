@@ -1429,4 +1429,3 @@ SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
 
-ALTER TABLE user ADD COLUMN emailseq tinyint;
