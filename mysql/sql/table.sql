@@ -1212,11 +1212,10 @@ SELECT * FROM user;
 SELECT * FROM item;
 SELECT * FROM item_qna;
 
-ALTER TABLE item_qna CHANGE COLUMN date date DATETIME;
-
 
 SELECT * FROM CodeGroup;
 SELECT * FROM Code;
+
 
 INSERT INTO CodeGroup(
 		property
@@ -1392,3 +1391,42 @@ CREATE TABLE IF NOT EXISTS `olive`.`Code` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 ;
+
+CREATE TABLE IF NOT EXISTS `olive`.`itemOption` (
+  `seq` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL COMMENT '호수',
+  `item_seq` INT NOT NULL,
+  PRIMARY KEY (`seq`),
+  INDEX `fk_itemOption_item1_idx` (`item_seq` ASC) VISIBLE,
+  CONSTRAINT `fk_itemOption_item1`
+    FOREIGN KEY (`item_seq`)
+    REFERENCES `olive`.`item` (`seq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `olive`.`itemOptionDetail` (
+  `seq` INT NOT NULL,
+  `choice` VARCHAR(45) NOT NULL COMMENT '21호, 23호 등 한 아이템 당 호수',
+  `itemOption_seq` INT NOT NULL,
+  PRIMARY KEY (`seq`),
+  INDEX `fk_itemOptionDetail_itemOption1_idx` (`itemOption_seq` ASC) VISIBLE,
+  CONSTRAINT `fk_itemOptionDetail_itemOption1`
+    FOREIGN KEY (`itemOption_seq`)
+    REFERENCES `olive`.`itemOption` (`seq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+
+SELECT * FROM itemOption;
+SELECT * FROM itemOptionDetail;
+SELECT * FROM item;
+SELECT * FROM user;
+SELECT * FROM Code;
+SELECT * FROM CodeGroup;
+
+
+ALTER TABLE user ADD COLUMN emailseq tinyint;
