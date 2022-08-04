@@ -1,6 +1,6 @@
 use olive;
 
-
+-- 코드그룹 , 코드
 SELECT
 	a.seq
     , a.property
