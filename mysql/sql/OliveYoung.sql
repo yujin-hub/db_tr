@@ -5,4 +5,10 @@ use olive;
 SELECT * FROM user WHERE id = "cuj" AND pw="hello"
 ; 
 
--- 프로젝트 관련 쿼리 완성
+-- 회원가입
+
+-- 상품 목록
+
+-- 상품 상세
+
+-- 구매

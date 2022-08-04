@@ -1424,7 +1424,14 @@ ENGINE = InnoDB
 SELECT * FROM itemOption;
 SELECT * FROM itemOptionDetail;
 SELECT * FROM item;
+SELECT * FROM item_qna;
+SELECT * FROM item_review;
 SELECT * FROM user;
+SELECT * FROM option_list;
+SELECT * FROM select_item_list;
+SELECT * FROM purchase;
+SELECT * FROM purchase_item;
+SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
