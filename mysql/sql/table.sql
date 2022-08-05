@@ -1429,10 +1429,13 @@ SELECT * FROM item_review;
 SELECT * FROM user;
 SELECT * FROM option_list;
 SELECT * FROM select_item_list;
+SELECT * FROM shipping_addr;
 SELECT * FROM purchase;
 SELECT * FROM purchase_item;
 SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
+
+ALTER TABLE item DROP COLUMN select_item;
 

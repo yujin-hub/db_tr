@@ -26,17 +26,6 @@ LEFT JOIN user b on b.seq = a.user_seq
 ;
 
 
-SELECT
-	a.seq
-    , a.property
-    , b.seq
-    , b.name
-FROM CodeGroup a
-LEFT JOIN Code b on a.seq = b.CodeGroup_seq
--- INNER JOIN Code b on a.seq = b.CodeGroup_seq
--- JOIN Code b on a.seq = b.CodeGroup_seq
-;
-
 
 
 
