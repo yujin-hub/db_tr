@@ -1437,5 +1437,5 @@ SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
 
-ALTER TABLE item DROP COLUMN select_item;
-
+ALTER TABLE item ADD COLUMN numPurchase INT;
+ALTER TABLE item ADD COLUMN discount INT;
