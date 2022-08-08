@@ -1,21 +1,5 @@
 use olive;
 
-SELECT * FROM itemOption;
-SELECT * FROM itemOptionDetail;
-SELECT * FROM item;
-SELECT * FROM item_qna;
-SELECT * FROM item_review;
-SELECT * FROM user;
-SELECT * FROM option_list;
-SELECT * FROM select_item_list;
-SELECT * FROM shipping_addr;
-SELECT * FROM purchase;
-SELECT * FROM purchase_item;
-SELECT * FROM brand_list;
-SELECT * FROM Code;
-SELECT * FROM CodeGroup;
-
-
 -- 코드그룹 , 코드
 SELECT
 	a.seq
@@ -28,7 +12,6 @@ INNER JOIN Code b on a.seq = b.CodeGroup_seq
 -- JOIN Code b on a.seq = b.CodeGroup_seq
 ;
 
-
 -- 로그인
 SELECT 
 	name
@@ -40,6 +23,73 @@ WHERE
     AND pw="hello"
 ; 
 
+
+-- 메인.실시간 top3 (구매수 컬럼 top3)
+
+
+
+-- 메인.weekly special
+
+
+
+-- 메인. 주목해야 할 브랜드 
+
+
+
+
+
+-- 회원가입
+INSERT INTO user (
+		name
+        , gender
+        , dob
+        , tel
+        , id
+        , pw
+        , nickname
+        , email
+        , emailseq
+        , skintype
+	) 
+VALUES (
+		"Yujin"
+        , 22
+        , '1999.04.05'
+        , 11111111
+        , "cuj"
+		, "hello"
+        , "유진"
+        , "cuj0405@naver.com"
+        , 15
+        , 2
+	)
+;
+
+-- 아이디/비밀번호 찾기
+SELECT 
+	id
+FROM user
+WHERE
+	name = "Yujin"
+    AND dob = '1999.04.05'
+    AND tel = 11111111
+;    
+
+SELECT 
+	pw
+FROM user
+WHERE
+	id = "cuj"
+    AND dob = '1999.04.05'
+    AND tel = 11111111
+; 
+
+
+
+
+
+
+-- (로그인)
 SELECT 
 	name
     , gender
@@ -149,35 +199,9 @@ WHERE
 	id = "rhksflwk" 
     AND pw="manager2"
 ; 
-
-
--- 회원가입
-INSERT INTO user (
-		name
-        , gender
-        , dob
-        , tel
-        , id
-        , pw
-        , nickname
-        , email
-        , emailseq
-        , skintype
-	) 
-VALUES (
-		"Yujin"
-        , 22
-        , '1999.04.05'
-        , 11111111
-        , "cuj"
-		, "hello"
-        , "유진"
-        , "cuj0405@naver.com"
-        , 15
-        , 2
-	)
-;
-
+ 
+ 
+ -- (회원가입)
 INSERT INTO user (
 		name
         , gender
@@ -465,34 +489,7 @@ VALUES (
 ;
 
 
--- 상품 리스트
-
-
-
-
-
--- 상품 상세
-
-
-
-
-
--- 구매
-
-
-
-
-
--- 아이디/비밀번호 찾기
-SELECT 
-	id
-FROM user
-WHERE
-	name = "Yujin"
-    AND dob = '1999.04.05'
-    AND tel = 11111111
-;    
-
+-- 아이디/패스워드 찾기
 SELECT 
 	id
 FROM user
@@ -597,15 +594,6 @@ SELECT
 	pw
 FROM user
 WHERE
-	id = "cuj"
-    AND dob = '1999.04.05'
-    AND tel = 11111111
-; 
-
-SELECT 
-	pw
-FROM user
-WHERE
 	id = "dpawnl"
     AND dob = '1997.01.10'
     AND tel = 22222222
@@ -700,4 +688,3 @@ WHERE
     AND dob = '1994.05.20'
     AND tel = 43214321
 ; 
-
