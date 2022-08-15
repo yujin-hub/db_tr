@@ -111,7 +111,7 @@ SELECT
 FROM user 
 WHERE 
 	id = "dpffl" 
-    AND pw="happy"
+    AND pw="happy" 
 ; 
 
 SELECT 
