@@ -55,7 +55,7 @@ INNER JOIN brand_list b on 1=1
 -- subquery
 SELECT
 	a.seq
-	, (SELECT bb.id FROM user bb where a.writer = bb.seq) as id
+	, (SELECT b.id FROM user b where a.writer = b.seq) as id
     , a.question
     , a.answer
 FROM item_qna a 
