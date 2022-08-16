@@ -1436,7 +1436,3 @@ SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
-
-ALTER TABLE item ADD COLUMN regist DATE;
-ALTER TABLE item ADD COLUMN numPurchase INT;
-ALTER TABLE item ADD COLUMN discount INT;

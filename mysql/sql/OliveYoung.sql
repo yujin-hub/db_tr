@@ -27,10 +27,7 @@ WHERE
 
 
 
-
 -- 메인.weekly special
-
-
 
 
 
@@ -39,6 +36,58 @@ WHERE
 
 
 
+
+
+
+-- defalutNY
+SELECT 
+	a.seq
+	, a.name
+    , a.info_item
+    , b.num
+    , b.name
+FROM item a
+INNER JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+    and a.defaultNY = 1
+;
+
+-- subquery
+SELECT
+	a.seq
+	, (SELECT bb.id FROM user bb where a.writer = bb.seq) as id
+    , a.question
+    , a.answer
+FROM item_qna a 
+;
+
+-- order by
+SELECT
+	a.name
+    , a.info_item
+    , a.numPurchase
+    , a.regist
+    , b.num
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+ORDER BY 
+	a. regist desc
+;
+
+SELECT
+	a.name
+    , a.info_item
+    , a.numPurchase
+    , b.num
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+ORDER BY 
+	a. numPurchase desc
+;
 
 
 
