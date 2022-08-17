@@ -90,6 +90,38 @@ ORDER BY
 ;
 
 
+-- union (중복되는 데이터는 제거 (union all의 경우 중복된 데이터도 다 출력), 공통되지 않은 데이터의 경우 공백이나 의미 없는 컬럼으로 컬럼 갯수 맞출것)
+SELECT 
+	a.seq
+    , a.name
+    , a.discount
+    , a.price
+    , a.regist
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+WHERE 1=1
+	and a.regist between "2021-01-01" and "2021-12-31"
+
+union all
+
+SELECT 
+	a.seq
+    , a.name
+    , a.discount
+    , a.price
+    , a.regist
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+WHERE 1=1
+	and a.regist between "2020-01-01" and "2020-12-31"
+;
+
+
+
 
 -- 회원가입
 INSERT INTO user (
@@ -136,8 +168,6 @@ WHERE
     AND dob = '1999.04.05'
     AND tel = 11111111
 ; 
-
-
 
 
 
