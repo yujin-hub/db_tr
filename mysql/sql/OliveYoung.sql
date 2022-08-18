@@ -771,3 +771,26 @@ WHERE
     AND dob = '1994.05.20'
     AND tel = 43214321
 ; 
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `olive`.`itemUploaded` (
+  `seq` INT NOT NULL AUTO_INCREMENT,
+  `type` TINYINT NOT NULL,
+  `defaultNY` TINYINT NOT NULL,
+  `sort` TINYINT NOT NULL,
+  `originalName` VARCHAR(100) NOT NULL,
+  `uuid` VARCHAR(100) NOT NULL,
+  `ext` VARCHAR(45) NOT NULL,
+  `size` BIGINT NOT NULL,
+  `delNY` TINYINT NOT NULL,
+  `pseq` BIGINT NOT NULL,
+  PRIMARY KEY (`seq`))
+ENGINE = InnoDB
+;
+
+select * from itemUploaded;
+select * from item;
