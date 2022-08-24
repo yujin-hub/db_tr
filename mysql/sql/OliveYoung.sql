@@ -776,7 +776,6 @@ WHERE
 
 
 
-
 CREATE TABLE IF NOT EXISTS `olive`.`itemUploaded` (
   `seq` INT NOT NULL AUTO_INCREMENT,
   `type` TINYINT NOT NULL,
@@ -794,3 +793,5 @@ ENGINE = InnoDB
 
 select * from itemUploaded;
 select * from item;
+select * from user;
+
