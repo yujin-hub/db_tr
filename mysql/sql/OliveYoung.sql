@@ -794,4 +794,5 @@ ENGINE = InnoDB
 select * from itemUploaded;
 select * from item;
 select * from user;
+select * from shipping_addr;
 
