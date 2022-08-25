@@ -793,6 +793,7 @@ ENGINE = InnoDB
 
 select * from itemUploaded;
 select * from item;
+select * from Code;
 select * from user;
 select * from shipping_addr;
 
