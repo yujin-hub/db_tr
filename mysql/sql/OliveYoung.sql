@@ -788,7 +788,7 @@ CREATE TABLE IF NOT EXISTS `olive`.`itemUploaded` (
   `delNY` TINYINT NOT NULL,
   `pseq` BIGINT NOT NULL,
   PRIMARY KEY (`seq`))
-ENGINE = InnoDB
+ENGINE = InnoDB 
 ;
 
 select * from itemUploaded;
