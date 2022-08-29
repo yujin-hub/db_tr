@@ -1432,4 +1432,3 @@ SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
-
