@@ -1,9 +1,5 @@
 use olive;
 
-DROP TABLE item;
-DROP TABLE brand_list;
-DROP TABLE shipping_addr;
-DROP TABLE user;
 
 CREATE TABLE IF NOT EXISTS `olive`.`brand_list` (
   `seq` INT NOT NULL AUTO_INCREMENT,
@@ -1435,4 +1431,5 @@ SELECT * FROM purchase_item;
 SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
+
 
