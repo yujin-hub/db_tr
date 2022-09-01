@@ -2,10 +2,16 @@ use olive;
 
 -- 코드그룹 , 코드
 SELECT
-	a.seq
-    , a.property
-    , b.seq
+	b.seq
+    , b.codeGroup_seq
+    , a.propertyKor
+	, b.codeseq
+    , b.anothercode
     , b.name
+    , b.nameEng
+    , b.useNY
+    , b.regDate
+    , b.modDate
 FROM CodeGroup a
 -- LEFT JOIN Code b on a.seq = b.CodeGroup_seq
 INNER JOIN Code b on a.seq = b.CodeGroup_seq
