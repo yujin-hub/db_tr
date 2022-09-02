@@ -18,6 +18,12 @@ INNER JOIN Code b on a.seq = b.CodeGroup_seq
 -- JOIN Code b on a.seq = b.CodeGroup_seq
 ;
 
+
+
+
+
+
+
 -- 로그인
 SELECT 
 	name
@@ -66,6 +72,35 @@ SELECT
     , a.answer
 FROM item_qna a 
 ;
+
+SELECT 
+	a.seq
+    , a.num
+    , a.propertyKor
+    , property
+    , (SELECT count(*) FROM Code b WHERE a.num = b.codeGroup_seq GROUP BY a.num) as codeNum
+    , a.regDate
+    , a.modDate
+    , a.useNY
+    , a.delNY
+From CodeGroup a
+INNER JOIN Code b on 1 = 1
+	and b.codeGroup_seq = a.seq
+;
+
+
+select * from Code;
+select * from CodeGroup;
+
+
+
+SELECT 
+	COUNT(*) codeGroup_seq
+From Code a
+INNER JOIN CodeGroup b on a.codeGroup_Seq = b.seq
+Group by a.codeGroup_Seq
+;
+
 
 -- order by
 SELECT

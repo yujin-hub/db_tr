@@ -1432,3 +1432,18 @@ SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
+
+
+SELECT 
+	a.userSeq
+	, a.userGrade
+	, a.name
+	, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gender
+	, a.tel
+	, a.email
+	, a.accessDate
+	, a.userDelNY
+FROM user a
+WHERE 1=1
+	AND userDelNY = 0		
+;
