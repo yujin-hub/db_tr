@@ -1433,6 +1433,26 @@ SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
 
+select  
+	FORMAT((price * (100-discount)/100), 0) AS sale    
+from item;   
+
+
+
+SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gender
+			, a.tel
+			, a.email
+			, DATE_FORMAT(a.accessDate,'%Y-%m-%d') as regDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1
+			AND userDelNY = 0	
+            ;
+
 
 SELECT 
 	a.userSeq
@@ -1447,3 +1467,18 @@ FROM user a
 WHERE 1=1
 	AND userDelNY = 0		
 ;
+
+
+SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gender
+			, a.tel
+			, a.email
+			, DATE_FORMAT(a.accessDate,'%Y-%m-%d-%T') as accessDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1
+			AND userDelNY = 0	
+            ;
