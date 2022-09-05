@@ -832,9 +832,15 @@ CREATE TABLE IF NOT EXISTS `olive`.`itemUploaded` (
 ENGINE = InnoDB 
 ;
 
+
+use olive;
 select * from itemUploaded;
 select * from item;
 select * from Code;
 select * from user;
 select * from shipping_addr;
 
+
+select  
+	FORMAT(price, 0) AS price    
+from item;   
