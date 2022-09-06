@@ -1482,3 +1482,9 @@ SELECT
 		WHERE 1=1
 			AND userDelNY = 0	
             ;
+            
+
+          
+            
+            
+            
