@@ -1417,6 +1417,9 @@ ENGINE = InnoDB
 ;
 
 
+
+use olive;
+
 SELECT * FROM itemOption;
 SELECT * FROM itemOptionDetail;
 SELECT * FROM item;
@@ -1485,6 +1488,33 @@ SELECT
             
 
           
+            SELECT
+			b.seq
+		    , b.codeGroup_seq
+		    , a.propertyKor
+			, b.codeseq
+		    , b.anothercode
+		    , b.name
+		    , b.nameEng
+		    , b.useNY
+		    , b.regDate
+		    , b.modDate
+		FROM CodeGroup a
+		-- LEFT JOIN Code b on a.seq = b.CodeGroup_seq
+		INNER JOIN Code b on a.seq = b.CodeGroup_seq
+		-- JOIN Code b on a.seq = b.CodeGroup_seq
+        ;
             
             
-            
+            SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gen
+			, a.tel
+			, a.email
+			, a.accessDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1
+			;
