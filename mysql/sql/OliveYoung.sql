@@ -844,3 +844,41 @@ select * from shipping_addr;
 select  
 	FORMAT(price, 0) AS price    
 from item;   
+
+
+
+select aa.*
+from (
+SELECT a.seq 
+, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as name 
+, a.name , (SELECT FORMAT(a.price, 0)) as price , (SELECT FORMAT((a.price * (100-discount)/100), 
+0)) as salePrice , a.regist , (SELECT FORMAT(a.numPurchase, 0)) as numPurchase , a.stock FROM 
+item a
+) as aa
+where 1=1
+and brand LIKE CONCAT('%','클리오','%')  ;
+
+
+SELECT a.seq 
+, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as name 
+, a.name 
+, (SELECT FORMAT(a.price, 0)) as price , (SELECT FORMAT((a.price * (100-discount)/100), 
+0)) as salePrice , a.regist , (SELECT FORMAT(a.numPurchase, 0)) as numPurchase , a.stock FROM 
+item a
+where 1=1
+and name LIKE CONCAT('%','클리오','%')
+;
+
+SELECT aa.*
+		FROM 
+		 	( SELECT 
+					a.seq
+					, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as brand
+					, a.name
+					, (SELECT FORMAT(a.price, 0)) as price
+					, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+					, a.regist
+					, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+					, a.stock
+				FROM item a ) AS aa
+				WHERE 1=1;
