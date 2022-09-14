@@ -1434,11 +1434,13 @@ SELECT * FROM purchase_item;
 SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
-
-
-select  
+SELECT  
 	FORMAT((price * (100-discount)/100), 0) AS sale    
 from item;   
+
+SELECT  
+	FORMAT(price, 0) AS price 
+from item;
 
 
 
@@ -1518,3 +1520,34 @@ SELECT
 		FROM user a
 		WHERE 1=1
 			;
+
+            
+            SELECT 
+			a.seq
+			, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.seq = b.num) as brand
+			, a.name
+			, (SELECT FORMAT(a.price, 0)) as price
+			, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+			, a.regist
+			, a.numPurchase
+			, a.stock
+		FROM item a
+		WHERE 1=1
+        ;
+
+
+
+SELECT 
+			a.seq
+			, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as brand
+			, a.name
+			, a.regist
+			, a.numPurchase
+			, a.stock
+		FROM item a
+		WHERE 1=1
+        ;
+        
+        
+SELECT * FROM item;
+SELECT * FROM brand_list;
