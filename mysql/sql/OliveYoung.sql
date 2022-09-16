@@ -837,10 +837,23 @@ use olive;
 select * from itemUploaded;
 select * from item;
 select * from Code;
+select * from CodeGroup;
 select * from user;
 select * from shipping_addr;
 
 
+SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE 1=1 AND a.gender = b.codeseq) as gen
+			, a.tel
+			, a.email
+			, a.accessDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1;
+        
 select  
 	FORMAT(price, 0) AS price    
 from item;   
@@ -869,7 +882,7 @@ where 1=1
 and name LIKE CONCAT('%','클리오','%')
 ;
 
-SELECT aa.*
+	SELECT aa.*
 		FROM 
 		 	( SELECT 
 					a.seq
@@ -881,4 +894,7 @@ SELECT aa.*
 					, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
 					, a.stock
 				FROM item a ) AS aa
-				WHERE 1=1;
+		WHERE 1=1
+				;
+
+    
