@@ -897,4 +897,32 @@ and name LIKE CONCAT('%','클리오','%')
 		WHERE 1=1
 				;
 
+SELECT 
+	a.seq
+	, b.name
+	, a.name
+	, (SELECT FORMAT(a.price, 0)) as price
+	, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+	, a.regist
+	, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+	, a.stock
+FROM item a 
+INNER JOIN 
+		WHERE 1=1;
     
+    
+SELECT
+		b.seq
+		, b.codeGroup_seq
+		, a.propertyKor
+		, b.codeseq
+		, b.anothercode
+		, b.name
+		, b.nameEng
+		, b.useNY
+		, b.regDate
+		, b.modDate
+FROM CodeGroup a
+INNER JOIN Code b on a.seq = b.CodeGroup_seq
+WHERE 1=1
+   
