@@ -898,16 +898,16 @@ and name LIKE CONCAT('%','클리오','%')
 				;
 
 SELECT 
-	a.seq
-	, b.name
-	, a.name
-	, (SELECT FORMAT(a.price, 0)) as price
-	, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
-	, a.regist
-	, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
-	, a.stock
-FROM item a 
-INNER JOIN 
+				a.seq
+				, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.seq = b.seq) as brand
+				, a.name
+				, (SELECT FORMAT(a.price, 0)) as price
+				, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+				, a.regist
+				, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+				, a.stock
+                FROM item a 
+		LEFT JOIN brand_list b on a.seq = b.seq
 		WHERE 1=1;
     
     
@@ -923,6 +923,17 @@ SELECT
 		, b.regDate
 		, b.modDate
 FROM CodeGroup a
-INNER JOIN Code b on a.seq = b.CodeGroup_seq
-WHERE 1=1
+LEFT JOIN Code b on a.seq = b.CodeGroup_seq
+WHERE 1=1;
    
+
+use olive;
+select * from itemUploaded;
+select * from item;
+select * from Code;
+select * from CodeGroup;
+select * from user;
+select * from shipping_addr;
+select * from brand_list;
+
+
