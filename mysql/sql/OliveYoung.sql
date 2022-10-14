@@ -937,7 +937,26 @@ select * from shipping_addr;
 select * from brand_list;
 select * from itemUploaded;
 select * from userUploaded;
-select * from productUploaded;
+select * from profileUploaded;
+
+
+
+
+
+-- 실시간 top3
+SELECT 
+	*
+FROM item
+ORDER BY numPurchase DESC
+LIMIT 3;
+
+
+-- WEEKLY SPECIAL (랜덤)
+SELECT 
+	*
+FROM item
+ORDER BY RAND()
+LIMIT 3;
 
 
 
@@ -983,3 +1002,16 @@ CREATE TABLE `productUploaded` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+SELECT 
+				a.seq
+				, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as brand
+				, a.name
+				, (SELECT FORMAT(a.price, 0)) as price
+				, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+				, a.regist
+				, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+				, a.stock
+                FROM item a 
+		LEFT JOIN brand_list b on a.seq = b.seq
+		WHERE 1=1
+        ;
