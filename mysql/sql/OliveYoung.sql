@@ -935,13 +935,13 @@ select * from CodeGroup;
 select * from user;
 select * from shipping_addr;
 select * from brand_list;
-select * from itemUploaded;
-select * from userUploaded;
 select * from profileUploaded;
 
 
-
-
+select 
+	*
+FROM item 
+WHERE brand_list_seq = 11;
 
 -- 실시간 top3
 SELECT 
@@ -981,7 +981,7 @@ CREATE TABLE `userUploaded` (
   PRIMARY KEY (`seq`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `productUploaded` (
+CREATE TABLE `itemUploaded` (
   `seq` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `type` tinyint(4) DEFAULT NULL,
   `defaultNy` tinyint(4) DEFAULT NULL,
