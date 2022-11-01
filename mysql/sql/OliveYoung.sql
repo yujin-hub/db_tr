@@ -2,15 +2,27 @@ use olive;
 
 -- 코드그룹 , 코드
 SELECT
-	a.seq
-    , a.property
-    , b.seq
+	b.seq
+    , b.codeGroup_seq
+    , a.propertyKor
+	, b.codeseq
+    , b.anothercode
     , b.name
+    , b.nameEng
+    , b.useNY
+    , b.regDate
+    , b.modDate
 FROM CodeGroup a
 -- LEFT JOIN Code b on a.seq = b.CodeGroup_seq
 INNER JOIN Code b on a.seq = b.CodeGroup_seq
 -- JOIN Code b on a.seq = b.CodeGroup_seq
 ;
+
+
+
+
+
+
 
 -- 로그인
 SELECT 
@@ -27,10 +39,7 @@ WHERE
 
 
 
-
 -- 메인.weekly special
-
-
 
 
 
@@ -42,9 +51,122 @@ WHERE
 
 
 
+-- defalutNY
+SELECT 
+	a.seq
+	, a.name
+    , a.info_item
+    , b.num
+    , b.name
+FROM item a
+INNER JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+    and a.defaultNY = 1
+;
+
+-- subquery
+SELECT
+	a.seq
+	, (SELECT b.id FROM user b where a.writer = b.seq) as id
+    , a.question
+    , a.answer
+FROM item_qna a 
+;
+
+SELECT 
+	a.seq
+    , a.num
+    , a.propertyKor
+    , property
+    , (SELECT count(*) FROM Code b WHERE a.num = b.codeGroup_seq GROUP BY a.num) as codeNum
+    , a.regDate
+    , a.modDate
+    , a.useNY
+    , a.delNY
+From CodeGroup a
+INNER JOIN Code b on 1 = 1
+	and b.codeGroup_seq = a.seq
+;
+
+
+select * from Code;
+select * from CodeGroup;
+
+
+
+SELECT 
+	COUNT(*) codeGroup_seq
+From Code a
+INNER JOIN CodeGroup b on a.codeGroup_Seq = b.seq
+Group by a.codeGroup_Seq
+;
+
+
+-- order by
+SELECT
+	a.name
+    , a.info_item
+    , a.numPurchase
+    , a.regist
+    , b.num
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+ORDER BY 
+	a. regist desc
+;
+
+SELECT
+	a.name
+    , a.info_item
+    , a.numPurchase
+    , b.num
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+ORDER BY 
+	a. numPurchase desc
+;
+
+
+-- union (중복되는 데이터는 제거 (union all의 경우 중복된 데이터도 다 출력), 공통되지 않은 데이터의 경우 공백이나 의미 없는 컬럼으로 컬럼 갯수 맞출것)
+SELECT 
+	a.seq
+    , a.name
+    , a.discount
+    , a.price
+    , a.regist
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+WHERE 1=1
+	and a.regist between "2021-01-01" and "2021-12-31"
+
+union all
+
+SELECT 
+	a.seq
+    , a.name
+    , a.discount
+    , a.price
+    , a.regist
+    , b.name
+FROM item a
+LEFT JOIN brand_list b on 1=1
+	and a.brand_list_seq = b.seq
+WHERE 1=1
+	and a.regist between "2020-01-01" and "2020-12-31"
+;
+
+
+
+
 -- 회원가입
 INSERT INTO user (
-		name
+		name 
         , gender
         , dob
         , tel
@@ -87,8 +209,6 @@ WHERE
     AND dob = '1999.04.05'
     AND tel = 11111111
 ; 
-
-
 
 
 
@@ -692,3 +812,206 @@ WHERE
     AND dob = '1994.05.20'
     AND tel = 43214321
 ; 
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `olive`.`itemUploaded` (
+  `seq` INT NOT NULL AUTO_INCREMENT,
+  `type` TINYINT NOT NULL,
+  `defaultNY` TINYINT NOT NULL,
+  `sort` TINYINT NOT NULL,
+  `originalName` VARCHAR(100) NOT NULL,
+  `uuid` VARCHAR(100) NOT NULL,
+  `ext` VARCHAR(45) NOT NULL,
+  `size` BIGINT NOT NULL,
+  `delNY` TINYINT NOT NULL,
+  `pseq` BIGINT NOT NULL,
+  PRIMARY KEY (`seq`))
+ENGINE = InnoDB 
+;
+
+
+use olive;
+select * from itemUploaded;
+select * from item;
+select * from Code;
+select * from CodeGroup;
+select * from user;
+select * from shipping_addr;
+
+
+SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE 1=1 AND a.gender = b.codeseq) as gen
+			, a.tel
+			, a.email
+			, a.accessDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1;
+        
+select  
+	FORMAT(price, 0) AS price    
+from item;   
+
+
+
+select aa.*
+from (
+SELECT a.seq 
+, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as name 
+, a.name , (SELECT FORMAT(a.price, 0)) as price , (SELECT FORMAT((a.price * (100-discount)/100), 
+0)) as salePrice , a.regist , (SELECT FORMAT(a.numPurchase, 0)) as numPurchase , a.stock FROM 
+item a
+) as aa
+where 1=1
+and brand LIKE CONCAT('%','클리오','%')  ;
+
+
+SELECT a.seq 
+, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as name 
+, a.name 
+, (SELECT FORMAT(a.price, 0)) as price , (SELECT FORMAT((a.price * (100-discount)/100), 
+0)) as salePrice , a.regist , (SELECT FORMAT(a.numPurchase, 0)) as numPurchase , a.stock FROM 
+item a
+where 1=1
+and name LIKE CONCAT('%','클리오','%')
+;
+
+	SELECT aa.*
+		FROM 
+		 	( SELECT 
+					a.seq
+					, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as brand
+					, a.name
+					, (SELECT FORMAT(a.price, 0)) as price
+					, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+					, a.regist
+					, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+					, a.stock
+				FROM item a ) AS aa
+		WHERE 1=1
+				;
+
+SELECT 
+				a.seq
+				, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.seq = b.seq) as brand
+				, a.name
+				, (SELECT FORMAT(a.price, 0)) as price
+				, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+				, a.regist
+				, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+				, a.stock
+                FROM item a 
+		LEFT JOIN brand_list b on a.seq = b.seq
+		WHERE 1=1;
+    
+    
+SELECT
+		b.seq
+		, b.codeGroup_seq
+		, a.propertyKor
+		, b.codeseq
+		, b.anothercode
+		, b.name
+		, b.nameEng
+		, b.useNY
+		, b.regDate
+		, b.modDate
+FROM CodeGroup a
+LEFT JOIN Code b on a.seq = b.CodeGroup_seq
+WHERE 1=1;
+   
+
+use olive;
+select * from itemUploaded;
+select * from item;
+select * from Code;
+select * from CodeGroup;
+select * from user;
+select * from shipping_addr;
+select * from brand_list;
+select * from profileUploaded;
+
+
+select 
+	*
+FROM item 
+WHERE brand_list_seq = 11;
+
+-- 실시간 top3
+SELECT 
+	*
+FROM item
+ORDER BY numPurchase DESC
+LIMIT 3;
+
+
+-- WEEKLY SPECIAL (랜덤)
+SELECT 
+	*
+FROM item
+ORDER BY RAND()
+LIMIT 3;
+
+
+
+
+CREATE TABLE `userUploaded` (
+  `seq` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) DEFAULT NULL,
+  `defaultNy` tinyint(4) DEFAULT NULL,
+  `sort` tinyint(4) DEFAULT NULL,
+  `path` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `originalName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uuidName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ext` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` bigint(20) DEFAULT NULL,
+  `delNy` tinyint(4) NOT NULL,
+  `pseq` bigint(20) NOT NULL,
+  `regIp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `regSeq` bigint(20) DEFAULT NULL,
+  `regDeviceCd` int(11) DEFAULT NULL,
+  `regDateTime` datetime DEFAULT NULL,
+  `regDateTimeSvr` datetime DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `itemUploaded` (
+  `seq` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) DEFAULT NULL,
+  `defaultNy` tinyint(4) DEFAULT NULL,
+  `sort` tinyint(4) DEFAULT NULL,
+  `path` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `originalName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uuidName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ext` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` bigint(20) DEFAULT NULL,
+  `delNy` tinyint(4) NOT NULL,
+  `pseq` bigint(20) NOT NULL,
+  `regIp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `regSeq` bigint(20) DEFAULT NULL,
+  `regDeviceCd` int(11) DEFAULT NULL,
+  `regDateTime` datetime DEFAULT NULL,
+  `regDateTimeSvr` datetime DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+SELECT 
+				a.seq
+				, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as brand
+				, a.name
+				, (SELECT FORMAT(a.price, 0)) as price
+				, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+				, a.regist
+				, (SELECT FORMAT(a.numPurchase, 0)) as numPurchase
+				, a.stock
+                FROM item a 
+		LEFT JOIN brand_list b on a.seq = b.seq
+		WHERE 1=1
+        ;

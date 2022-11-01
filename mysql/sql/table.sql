@@ -1,9 +1,5 @@
 use olive;
 
-DROP TABLE item;
-DROP TABLE brand_list;
-DROP TABLE shipping_addr;
-DROP TABLE user;
 
 CREATE TABLE IF NOT EXISTS `olive`.`brand_list` (
   `seq` INT NOT NULL AUTO_INCREMENT,
@@ -1429,6 +1425,9 @@ SHOW INDEX FROM user;
 -- ALTER TABLE user DROP INDEX abc
 -- ;
 
+
+use olive;
+
 SELECT * FROM itemOption;
 SELECT * FROM itemOptionDetail;
 SELECT * FROM item;
@@ -1443,9 +1442,17 @@ SELECT * FROM purchase_item;
 SELECT * FROM brand_list;
 SELECT * FROM Code;
 SELECT * FROM CodeGroup;
+SELECT  
+	FORMAT((price * (100-discount)/100), 0) AS sale    
+from item;   
+
+SELECT  
+	FORMAT(price, 0) AS price 
+from item;
 
 
 
+<<<<<<< HEAD
 DELIMITER $$
 CREATE FUNCTION getName (
 seq bigint
@@ -1478,3 +1485,114 @@ DELIMITER ;
 --    'test'
 --    ); 
 --   END
+=======
+SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gender
+			, a.tel
+			, a.email
+			, DATE_FORMAT(a.accessDate,'%Y-%m-%d') as regDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1
+			AND userDelNY = 0	
+            ;
+
+
+SELECT 
+	a.userSeq
+	, a.userGrade
+	, a.name
+	, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gender
+	, a.tel
+	, a.email
+	, a.accessDate
+	, a.userDelNY
+FROM user a
+WHERE 1=1
+	AND userDelNY = 0		
+;
+
+
+SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gender
+			, a.tel
+			, a.email
+			, DATE_FORMAT(a.accessDate,'%Y-%m-%d-%T') as accessDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1
+			AND userDelNY = 0	
+            ;
+            
+
+          
+            SELECT
+			b.seq
+		    , b.codeGroup_seq
+		    , a.propertyKor
+			, b.codeseq
+		    , b.anothercode
+		    , b.name
+		    , b.nameEng
+		    , b.useNY
+		    , b.regDate
+		    , b.modDate
+		FROM CodeGroup a
+		-- LEFT JOIN Code b on a.seq = b.CodeGroup_seq
+		INNER JOIN Code b on a.seq = b.CodeGroup_seq
+		-- JOIN Code b on a.seq = b.CodeGroup_seq
+        ;
+            
+            
+            SELECT 
+			a.userSeq
+			, a.userGrade
+			, a.name
+			, (SELECT b.name FROM Code b WHERE a.gender = b.codeseq) as gen
+			, a.tel
+			, a.email
+			, a.accessDate
+			, a.userDelNY
+		FROM user a
+		WHERE 1=1
+			;
+
+            
+            SELECT 
+			a.seq
+			, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.seq = b.num) as brand
+			, a.name
+			, (SELECT FORMAT(a.price, 0)) as price
+			, (SELECT FORMAT((a.price * (100-discount)/100), 0)) as salePrice
+			, a.regist
+			, a.numPurchase
+			, a.stock
+		FROM item a
+		WHERE 1=1
+        ;
+
+
+
+SELECT 
+			a.seq
+			, (SELECT b.name FROM brand_list b WHERE 1=1 AND a.brand_list_seq = b.num) as brand
+			, a.name
+			, a.regist
+			, a.numPurchase
+			, a.stock
+		FROM item a
+		WHERE 1=1
+        ;
+        
+        
+SELECT * FROM item;
+SELECT * FROM brand_list;
+
+
+>>>>>>> branch 'main' of https://github.com/yujin-hub/db_tr.git
