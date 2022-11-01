@@ -1420,6 +1420,14 @@ CREATE TABLE IF NOT EXISTS `olive`.`itemOptionDetail` (
 ENGINE = InnoDB
 ;
 
+use olive;
+
+SHOW INDEX FROM user;
+
+-- CREATE INDEX abc ON user (userDelNY, accessDate)
+-- ;
+-- ALTER TABLE user DROP INDEX abc
+-- ;
 
 SELECT * FROM itemOption;
 SELECT * FROM itemOptionDetail;
@@ -1437,6 +1445,36 @@ SELECT * FROM Code;
 SELECT * FROM CodeGroup;
 
 
-ALTER TABLE item ADD COLUMN regist DATE;
-ALTER TABLE item ADD COLUMN numPurchase INT;
-ALTER TABLE item ADD COLUMN discount INT;
+
+DELIMITER $$
+CREATE FUNCTION getName (
+seq bigint
+) 
+RETURNS varchar(100)
+BEGIN
+	
+    declare rtName varchar(100);
+
+	select
+		name into rtName
+	from
+		user
+	where 1=1
+		and seq = seq
+	;
+
+	RETURN rtName;
+END$$
+DELIMITER ;
+
+-- CREATE DEFINER='sjmrdmin'@'%' TRIGGER 'olive'.'user_BEFORE_INSERT' BEFORE INSERT ON 'user' FOR EACH ROW 
+-- BEGIN
+--	INSERT INTO 'olive'.'user'
+--   ('name', 
+--   'userDelNY', 
+--   'userID') 
+--   VALUES ('test', 
+--    '0', 
+--    'test'
+--    ); 
+--   END
